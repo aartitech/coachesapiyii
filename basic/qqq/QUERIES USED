@@ -1,0 +1,10 @@
+I want to see which coaches I can schedule with.
+
+	SELECT * FROM `dataset` WHERE name="John Doe";
+
+	get datasert by name
+
+
+I want to see what 30-minute time slots are available to schedule with a particular coach.
+
+		SELECT * FROM dataset WHERE DATE_SUB(dataset.available_at(),INTERVAL 30 MINUTE) <= dataset.available_until;
