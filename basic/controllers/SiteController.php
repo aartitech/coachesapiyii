@@ -271,7 +271,6 @@ class SiteController extends Controller
         $coaches_master_id= $_POST['coaches_master_id'];
         $booking_date= $_POST['booking_date'];
         $time_slot= $_POST['time_slot'];
-
         $day = date('D', strtotime($booking_date));
         $dayFm = $this->getDayFullName($day);
         $dataset = Dataset::find()
@@ -281,7 +280,19 @@ class SiteController extends Controller
         if ($dataset) {
             $slots [] = $this->getTimeSlot(30, $dataset->available_at, $dataset->available_until);
         } 
-        if (!empty($slots)) {
+       $ts= explode("-",  $time_slot);
+       $staert=trim($ts[0]);
+       $endt=trim($ts[1]);
+       $booking_status=0;
+        if ($slots) {
+            foreach ($slots[0] as $value) {
+                if ($value['slot_start_time'] == $staert && $value['slot_end_time']  = $endt ) {
+                     $booking_status="1";
+                }
+                
+            }
+        }
+        if (!empty($slots) &&  $booking_status=1 ) {
             $model = new Booking();
             $model->coache_name=$coaches_master_id;
             $model->booking_date=$booking_date;
