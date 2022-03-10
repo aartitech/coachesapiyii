@@ -292,7 +292,7 @@ class SiteController extends Controller
                 
             }
         }
-        if (!empty($slots) &&  $booking_status=1 ) {
+        if (!empty($slots) &&  $booking_status==1 ) {
             $model = new Booking();
             $model->coache_name=$coaches_master_id;
             $model->booking_date=$booking_date;
