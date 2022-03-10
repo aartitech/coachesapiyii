@@ -10,7 +10,7 @@
 	URL: http://localhost/basic/web/site/booking-api/
 
 		Post Params
-        booking_date: 2022-03-04
+        booking_date:11-03-2022
         time_slot: 07:30 - 08:00
         coaches_master_id: 1
 
