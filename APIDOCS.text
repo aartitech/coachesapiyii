@@ -15,7 +15,12 @@
         coaches_master_id: 1
 
 
-
+	URL:  http://localhost/basic/web/booking/create
+	Post Params
+		coache_name: John Doe
+        booking_date: 2022-03-04
+        time_slot: 07:30 - 08:00
+        coaches_master_id: 1
 
 
 
