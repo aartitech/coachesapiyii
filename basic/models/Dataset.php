@@ -31,7 +31,7 @@ class Dataset extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'timezone', 'day_of_week', 'available_at', 'available_until'], 'required'],
-            [['name', 'timezone', 'day_of_week', 'available_at', 'available_until'], 'string', 'max' => 255],
+            [['name', 'timezone', 'day_of_week', 'available_at', 'available_until'], 'string'],
         ];
     }
 

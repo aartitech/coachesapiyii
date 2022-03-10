@@ -251,7 +251,10 @@ class SiteController extends Controller
         $model = new Booking();
         $model->coache_name=$coaches;
         $model->booking_date=$cdate;
-        $model->time_slot=$timeslotss;
+        $model->coaches_master_id=$timeslotss;
+
+
+
         if ($model->save(false)) {
             $response = ['status'=>'ok', 'response'=>  "success"];
         }
@@ -261,6 +264,46 @@ class SiteController extends Controller
 
         }
         echo json_encode($response);
+    }
+
+
+    public function actionBookingApi(){
+        $coaches_master_id= $_POST['coaches_master_id'];
+        $booking_date= $_POST['booking_date'];
+        $time_slot= $_POST['time_slot'];
+
+        $day = date('D', strtotime($booking_date));
+        $dayFm = $this->getDayFullName($day);
+        $dataset = Dataset::find()
+            ->where(['coaches_master_id'=>$coaches_master_id,'day_of_week' => $dayFm ])
+            ->one();
+        $slots=[];   
+        if ($dataset) {
+            $slots [] = $this->getTimeSlot(30, $dataset->available_at, $dataset->available_until);
+        } 
+        if (!empty($slots)) {
+            $model = new Booking();
+            $model->coache_name=$coaches_master_id;
+            $model->booking_date=$booking_date;
+            $model->time_slot=$time_slot;
+            $model->coaches_master_id=$coaches_master_id;
+            if ($model->save(false)) {
+                $response = ['status'=>'ok', 'response'=>  "success"];
+            }
+            else{
+                $response = ['status'=>'error', 'response'=>  "error"] ;
+            }
+        }
+        else{
+            $response =  ['status'=>'error', 'response'=>  "No slots are available"] ;
+
+        }
+      
+
+       
+       
+        echo json_encode($response);
+
     }
    
 }
